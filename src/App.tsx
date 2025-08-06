@@ -72,15 +72,15 @@ Please follow up within 24 hours.
     <div className="min-h-screen bg-white">
       {/* Navigation */}
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/98 backdrop-blur-lg shadow-xl border-b border-gray-100' : 'bg-transparent'
+        isScrolled ? 'bg-white/98 backdrop-blur-lg shadow-xl border-b border-gray-100' : 'bg-white/95 lg:bg-transparent backdrop-blur-sm lg:backdrop-blur-0'
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center space-x-3">
-              <img src="/logo.svg" alt="BitSynapse" className="h-10 w-10" />
-              <div className="flex flex-col">
-                <span className="text-xl font-bold text-gray-900">BitSynapse</span>
-                <span className="text-xs text-gray-600 -mt-1">IT Network Solutions Inc.</span>
+              <img src="/logo.svg" alt="BitSynapse" className="h-10 w-10 flex-shrink-0" />
+              <div className="flex flex-col min-w-0">
+                <span className="text-lg sm:text-xl font-bold text-gray-900 leading-tight">BitSynapse</span>
+                <span className="text-xs text-gray-600 leading-tight hidden sm:block">IT Network Solutions Inc.</span>
               </div>
             </div>
             
@@ -112,14 +112,14 @@ Please follow up within 24 hours.
           {/* Mobile Navigation */}
           {isMenuOpen && (
             <div className="lg:hidden bg-white border-t border-gray-100 py-4 shadow-lg">
-              <div className="flex flex-col space-y-4">
-                <button onClick={() => scrollToSection('home')} className="text-gray-700 hover:text-blue-600 transition-colors text-left font-medium">
+              <div className="flex flex-col space-y-4 px-4">
+                <button onClick={() => scrollToSection('home')} className="text-gray-700 hover:text-blue-600 transition-colors text-left font-medium py-2">
                   Home
                 </button>
-                <button onClick={() => scrollToSection('services')} className="text-gray-700 hover:text-blue-600 transition-colors text-left font-medium">
+                <button onClick={() => scrollToSection('services')} className="text-gray-700 hover:text-blue-600 transition-colors text-left font-medium py-2">
                   Services
                 </button>
-                <button onClick={() => scrollToSection('about')} className="text-gray-700 hover:text-blue-600 transition-colors text-left font-medium">
+                <button onClick={() => scrollToSection('about')} className="text-gray-700 hover:text-blue-600 transition-colors text-left font-medium py-2">
                   About
                 </button>
                 <button onClick={() => scrollToSection('contact')} className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-3 rounded-full hover:from-blue-700 hover:to-blue-800 transition-all duration-300 text-left font-semibold">
