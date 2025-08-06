@@ -64,7 +64,7 @@ Project Details: ${projectDetails}
 Please follow up within 24 hours.
     `.trim();
 
-    const mailtoLink = `mailto:hello@bitsynapse.ca?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const mailtoLink = `mailto:contact@bitsynapse.ca?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     window.location.href = mailtoLink;
   };
 
@@ -361,17 +361,10 @@ Please follow up within 24 hours.
                 <h3 className="text-2xl font-bold mb-6">Get Started Today</h3>
                 <div className="space-y-4">
                   <div className="flex items-center">
-                    <Phone className="h-6 w-6 mr-4 text-blue-200" />
-                    <div>
-                      <div className="font-semibold">Call for Immediate Help</div>
-                      <div className="text-blue-200">+1 (368) 380-3344</div>
-                    </div>
-                  </div>
-                  <div className="flex items-center">
                     <Mail className="h-6 w-6 mr-4 text-blue-200" />
                     <div>
                       <div className="font-semibold">Email Consultation</div>
-                      <div className="text-blue-200">hello@bitsynapse.ca</div>
+                      <div className="text-blue-200">contact@bitsynapse.ca</div>
                     </div>
                   </div>
                   <div className="flex items-center">
@@ -447,7 +440,7 @@ Please follow up within 24 hours.
                       name="phone"
                       required
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors bg-white"
-                      placeholder="+1 (368) 380-3344"
+                      placeholder="Your phone number"
                     />
                   </div>
                 </div>
@@ -536,14 +529,8 @@ Please follow up within 24 hours.
               <div className="space-y-4">
                 <div className="flex items-center">
                   <Mail className="h-5 w-5 mr-3 text-blue-400 flex-shrink-0" />
-                  <a href="mailto:hello@bitsynapse.ca" className="text-gray-300 hover:text-white transition-colors">
-                    hello@bitsynapse.ca
-                  </a>
-                </div>
-                <div className="flex items-center">
-                  <Phone className="h-5 w-5 mr-3 text-blue-400 flex-shrink-0" />
-                  <a href="tel:+13683803344" className="text-gray-300 hover:text-white transition-colors">
-                    +1 (368) 380-3344
+                  <a href="mailto:contact@bitsynapse.ca" className="text-gray-300 hover:text-white transition-colors">
+                    contact@bitsynapse.ca
                   </a>
                 </div>
                 <div className="flex items-start">
