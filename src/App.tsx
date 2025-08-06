@@ -108,27 +108,29 @@ Please follow up within 24 hours.
               {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
+        </div>
 
-          {/* Mobile Navigation */}
-          {isMenuOpen && (
-            <div className="lg:hidden bg-white border-t border-gray-100 py-4 shadow-lg">
-              <div className="flex flex-col space-y-4 px-4">
-                <button onClick={() => scrollToSection('home')} className="text-gray-700 hover:text-blue-600 transition-colors text-left font-medium py-2">
+        {/* Mobile Navigation - Outside container for full width */}
+        {isMenuOpen && (
+          <div className="lg:hidden bg-white border-t border-gray-100 py-4 shadow-lg">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="flex flex-col space-y-4 items-center">
+                <button onClick={() => scrollToSection('home')} className="text-gray-700 hover:text-blue-600 transition-colors font-medium py-2">
                   Home
                 </button>
-                <button onClick={() => scrollToSection('services')} className="text-gray-700 hover:text-blue-600 transition-colors text-left font-medium py-2">
+                <button onClick={() => scrollToSection('services')} className="text-gray-700 hover:text-blue-600 transition-colors font-medium py-2">
                   Services
                 </button>
-                <button onClick={() => scrollToSection('about')} className="text-gray-700 hover:text-blue-600 transition-colors text-left font-medium py-2">
+                <button onClick={() => scrollToSection('about')} className="text-gray-700 hover:text-blue-600 transition-colors font-medium py-2">
                   About
                 </button>
-                <button onClick={() => scrollToSection('contact')} className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-3 rounded-full hover:from-blue-700 hover:to-blue-800 transition-all duration-300 text-left font-semibold">
+                <button onClick={() => scrollToSection('contact')} className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-3 rounded-full hover:from-blue-700 hover:to-blue-800 transition-all duration-300 font-semibold">
                   Get Started
                 </button>
               </div>
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </nav>
 
       {/* Hero Section */}
