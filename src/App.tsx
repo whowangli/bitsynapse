@@ -24,14 +24,30 @@ import {
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      const scrolled = window.scrollY > 50;
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled_percentage = (winScroll / height) * 100;
+      
+      setIsScrolled(scrolled);
+      setScrollProgress(scrolled_percentage);
+      setShowScrollTop(window.scrollY > 300);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -72,7 +88,7 @@ Please follow up within 24 hours.
     <div className="min-h-screen bg-white">
       {/* Navigation */}
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/98 backdrop-blur-lg shadow-xl border-b border-gray-100' : 'bg-white/95 lg:bg-transparent backdrop-blur-sm lg:backdrop-blur-0'
+        isScrolled ? 'bg-white/98 backdrop-blur-lg shadow-2xl border-b border-gray-200' : 'bg-white/95 backdrop-blur-sm shadow-lg'
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
@@ -85,17 +101,33 @@ Please follow up within 24 hours.
             </div>
             
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-8">
+            <div className="hidden lg:flex items-center space-x-6">
               <button onClick={() => scrollToSection('home')} className="text-gray-700 hover:text-blue-600 transition-colors font-medium">
                 Home
               </button>
               <button onClick={() => scrollToSection('services')} className="text-gray-700 hover:text-blue-600 transition-colors font-medium">
-                Services
+                Solutions
               </button>
-              <button onClick={() => scrollToSection('about')} className="text-gray-700 hover:text-blue-600 transition-colors font-medium">
-                About
-              </button>
-              <button onClick={() => scrollToSection('contact')} className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-8 py-3 rounded-full hover:from-blue-700 hover:to-blue-800 transition-all duration-300 transform hover:scale-105 shadow-lg font-semibold">
+              <div className="relative group">
+                <button className="text-gray-700 hover:text-blue-600 transition-colors font-medium flex items-center">
+                  Company
+                  <ChevronDown className="h-4 w-4 ml-1 transform group-hover:rotate-180 transition-transform" />
+                </button>
+                <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                  <div className="py-2">
+                    <button onClick={() => scrollToSection('about')} className="w-full text-left px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-colors">
+                      Why Choose Us
+                    </button>
+                    <button onClick={() => scrollToSection('approach')} className="w-full text-left px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-colors">
+                      Our Approach
+                    </button>
+                    <button onClick={() => scrollToSection('innovation')} className="w-full text-left px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-colors">
+                      Innovation
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <button onClick={() => scrollToSection('contact')} className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-2.5 rounded-full hover:from-blue-700 hover:to-blue-800 transition-all duration-300 transform hover:scale-105 shadow-lg font-semibold">
                 Get Started
               </button>
             </div>
@@ -112,47 +144,58 @@ Please follow up within 24 hours.
 
         {/* Mobile Navigation - Outside container for full width */}
         {isMenuOpen && (
-          <div className="lg:hidden bg-white border-t border-gray-100 py-4 shadow-lg">
+          <div className="lg:hidden bg-white border-t border-gray-100 py-6 shadow-lg">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="flex flex-col space-y-4 items-center">
-                <button onClick={() => scrollToSection('home')} className="text-gray-700 hover:text-blue-600 transition-colors font-medium py-2">
+              <div className="flex flex-col space-y-2 items-center">
+                <button onClick={() => scrollToSection('home')} className="w-full text-center text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-colors font-medium py-3 rounded-lg">
                   Home
                 </button>
-                <button onClick={() => scrollToSection('services')} className="text-gray-700 hover:text-blue-600 transition-colors font-medium py-2">
-                  Services
+                <button onClick={() => scrollToSection('services')} className="w-full text-center text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-colors font-medium py-3 rounded-lg">
+                  Solutions
                 </button>
-                <button onClick={() => scrollToSection('about')} className="text-gray-700 hover:text-blue-600 transition-colors font-medium py-2">
-                  About
+                <button onClick={() => scrollToSection('about')} className="w-full text-center text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-colors font-medium py-3 rounded-lg">
+                  Why Choose Us
                 </button>
-                <button onClick={() => scrollToSection('contact')} className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-3 rounded-full hover:from-blue-700 hover:to-blue-800 transition-all duration-300 font-semibold">
+                <button onClick={() => scrollToSection('approach')} className="w-full text-center text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-colors font-medium py-3 rounded-lg">
+                  Our Approach
+                </button>
+                <button onClick={() => scrollToSection('innovation')} className="w-full text-center text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-colors font-medium py-3 rounded-lg">
+                  Innovation
+                </button>
+                <div className="w-full border-t border-gray-200 my-2"></div>
+                <button onClick={() => scrollToSection('contact')} className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-3 rounded-full hover:from-blue-700 hover:to-blue-800 transition-all duration-300 font-semibold">
                   Get Started
                 </button>
               </div>
             </div>
           </div>
         )}
+        
+        {/* Scroll Progress Bar */}
+        <div className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-blue-600 to-indigo-600 transition-all duration-300" 
+             style={{width: `${scrollProgress}%`}}>
+        </div>
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="pt-24 pb-20 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 relative overflow-hidden">
+      <section id="home" className="pt-24 pb-20 bg-white relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center max-w-4xl mx-auto">
-            <div className="inline-flex items-center px-4 py-2 bg-blue-100 rounded-full text-blue-700 text-sm font-semibold mb-8">
+            <div className="inline-flex items-center px-4 py-2 bg-blue-50 rounded-full text-blue-700 text-sm font-semibold mb-8">
               <Award className="h-4 w-4 mr-2" />
               15+ Years Experience • Fortune 500 Trusted
             </div>
             
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-8 leading-tight">
-              Enterprise-Grade
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 block">
-                Network Solutions
+              Your Local Experts,
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 block pb-2">
+                Global IT Insight.
               </span>
             </h1>
             
             <p className="text-xl md:text-2xl text-gray-600 mb-12 leading-relaxed max-w-3xl mx-auto">
-              Professional network infrastructure, smart home integration, and IT consulting 
-              that Fortune 500 companies trust. Now available for your home and business.
+              Intelligent Network Infrastructure. Solutions Experience Without Borders.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
@@ -195,11 +238,91 @@ Please follow up within 24 hours.
         </div>
       </section>
 
+      {/* Home Network Problems Section */}
+      <section className="py-24 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8">
+              Is Your Home Network Driving You Crazy?
+            </h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto text-left mb-12">
+              <div className="space-y-6">
+                <div className="flex items-start">
+                  <div className="w-2 h-2 bg-blue-600 rounded-full mt-3 mr-4 flex-shrink-0"></div>
+                  <div className="text-lg text-gray-700">Wi-Fi dead zones in your house?</div>
+                </div>
+                <div className="flex items-start">
+                  <div className="w-2 h-2 bg-blue-600 rounded-full mt-3 mr-4 flex-shrink-0"></div>
+                  <div className="text-lg text-gray-700">Smart devices always offline?</div>
+                </div>
+              </div>
+              <div className="space-y-6">
+                <div className="flex items-start">
+                  <div className="w-2 h-2 bg-blue-600 rounded-full mt-3 mr-4 flex-shrink-0"></div>
+                  <div className="text-lg text-gray-700">Issues with your computer or phone?</div>
+                </div>
+                <div className="flex items-start">
+                  <div className="w-2 h-2 bg-blue-600 rounded-full mt-3 mr-4 flex-shrink-0"></div>
+                  <div className="text-lg text-gray-700">Worried about your family's online security?</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="text-center mb-12">
+              <h3 className="text-2xl font-bold text-blue-600 mb-6">BitSynapse is Your Local Solution!</h3>
+              <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+                We provide fast, reliable, and secure networks for you.
+                <br />
+                From seamless Wi-Fi to smart home setup, we handle it all.
+              </p>
+              
+              <div className="text-lg font-semibold text-gray-900 mb-8">Our Services Include:</div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+                <div className="bg-white rounded-lg p-6 text-center shadow-lg border border-gray-200">
+                  <Wifi className="h-12 w-12 text-blue-600 mx-auto mb-4" />
+                  <div className="font-semibold text-gray-900">Home Wi-Fi Upgrades</div>
+                </div>
+                <div className="bg-white rounded-lg p-6 text-center shadow-lg border border-gray-200">
+                  <Home className="h-12 w-12 text-blue-600 mx-auto mb-4" />
+                  <div className="font-semibold text-gray-900">Smart Home Installation</div>
+                </div>
+                <div className="bg-white rounded-lg p-6 text-center shadow-lg border border-gray-200">
+                  <Network className="h-12 w-12 text-blue-600 mx-auto mb-4" />
+                  <div className="font-semibold text-gray-900">Network Troubleshooting</div>
+                </div>
+                <div className="bg-white rounded-lg p-6 text-center shadow-lg border border-gray-200">
+                  <Server className="h-12 w-12 text-blue-600 mx-auto mb-4" />
+                  <div className="font-semibold text-gray-900">Personal Cloud Solutions</div>
+                  <div className="text-sm text-gray-600 mt-2">(for photos, files & more!)</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="text-center">
+              <p className="text-xl text-gray-600 mb-8">
+                We bring world-class expertise to your neighborhood.
+              </p>
+              <p className="text-2xl font-bold text-gray-900 mb-8">
+                Contact us for a free consultation!
+              </p>
+              <button 
+                onClick={() => scrollToSection('contact')}
+                className="bg-gradient-to-r from-blue-500 to-indigo-500 text-white px-10 py-4 rounded-full hover:from-blue-600 hover:to-indigo-600 transition-all duration-300 transform hover:scale-105 shadow-2xl text-lg font-semibold"
+              >
+                Get Free Consultation
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Services Section */}
       <section id="services" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
-            <div className="inline-flex items-center px-4 py-2 bg-blue-100 rounded-full text-blue-700 text-sm font-semibold mb-6">
+            <div className="inline-flex items-center px-4 py-2 bg-blue-50 border border-blue-200 rounded-full text-blue-700 text-sm font-semibold mb-8">
               <Network className="h-4 w-4 mr-2" />
               Professional Services
             </div>
@@ -212,68 +335,53 @@ Please follow up within 24 hours.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+          {/* Services Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               {
-                icon: Building,
-                category: "Business Solutions",
-                title: "Enterprise Network Infrastructure",
-                description: "Complete network design, implementation, and maintenance for businesses of all sizes. From small offices to Fortune 500 companies.",
-                features: ["Network Design & Planning", "Security Implementation", "24/7 Monitoring", "Scalable Solutions"],
-                color: "blue"
+                icon: Users,
+                title: "Consulting",
+                description: "Expert IT consulting to assess your needs and design optimal network solutions."
               },
               {
-                icon: Home,
-                category: "Residential Services",
-                title: "Smart Home & Network Optimization",
-                description: "Transform your home with professional-grade networking, smart home integration, and private cloud solutions.",
-                features: ["Whole-Home Wi-Fi", "Smart Device Integration", "Private Cloud Setup", "Home Security Systems"],
-                color: "indigo"
-              }
-            ].map((service, index) => (
-              <div key={index} className="group bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl p-8 hover:from-blue-50 hover:to-indigo-50 transition-all duration-500 hover:shadow-2xl transform hover:-translate-y-2 border border-gray-200">
-                <div className={`w-16 h-16 bg-gradient-to-r ${service.color === 'blue' ? 'from-blue-500 to-blue-600' : 'from-indigo-500 to-indigo-600'} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                  <service.icon className="h-8 w-8 text-white" />
-                </div>
-                <div className={`inline-block px-3 py-1 ${service.color === 'blue' ? 'bg-blue-100 text-blue-700' : 'bg-indigo-100 text-indigo-700'} rounded-full text-sm font-semibold mb-4`}>
-                  {service.category}
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">{service.title}</h3>
-                <p className="text-gray-600 mb-6 text-lg leading-relaxed">{service.description}</p>
-                <div className="space-y-3">
-                  {service.features.map((feature, idx) => (
-                    <div key={idx} className="flex items-center text-gray-700">
-                      <CheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
-                      <span className="font-medium">{feature}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Additional Services Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: Server,
-                title: "Private Cloud Solutions",
-                description: "Secure, personal cloud servers for data storage and remote access."
+                icon: Network,
+                title: "Integration Implementation",
+                description: "Seamless integration and implementation of network infrastructure and systems."
               },
               {
-                icon: Shield,
-                title: "Cybersecurity Consulting",
-                description: "Comprehensive security audits and implementation for businesses."
+                icon: Zap,
+                title: "Support Maintenance",
+                description: "Ongoing support and maintenance to keep your network running at peak performance."
               },
               {
                 icon: Wifi,
-                title: "Network Troubleshooting",
-                description: "Expert diagnosis and resolution of network connectivity issues."
+                title: "Remote",
+                description: "Remote monitoring and management services for continuous network oversight."
+              },
+              {
+                icon: Building,
+                title: "Operation Management",
+                description: "Comprehensive operation management for enterprise network environments."
+              },
+              {
+                icon: Award,
+                title: "Optimization",
+                description: "Performance optimization services to maximize your network efficiency and speed."
+              },
+              {
+                icon: Server,
+                title: "Cloud",
+                description: "Cloud solutions including private cloud setup and hybrid cloud integration."
+              },
+              {
+                icon: Shield,
+                title: "Security Implementation",
+                description: "Comprehensive security implementation and cybersecurity consulting services."
               }
             ].map((service, index) => (
-              <div key={index} className="text-center group">
-                <div className="w-20 h-20 bg-gradient-to-r from-gray-100 to-gray-200 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:from-blue-100 group-hover:to-indigo-100 transition-all duration-300">
-                  <service.icon className="h-10 w-10 text-gray-600 group-hover:text-blue-600 transition-colors" />
+              <div key={index} className="text-center group bg-white rounded-2xl p-6 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-200 shadow-lg">
+                <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <service.icon className="h-8 w-8 text-white" />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
                 <p className="text-gray-600 leading-relaxed">{service.description}</p>
@@ -284,9 +392,13 @@ Please follow up within 24 hours.
       </section>
 
       {/* Why Choose Us Section */}
-      <section id="about" className="py-24 bg-gradient-to-br from-blue-50 to-indigo-50">
+      <section id="about" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
+            <div className="inline-flex items-center px-4 py-2 bg-blue-50 border border-blue-200 rounded-full text-blue-700 text-sm font-semibold mb-8">
+              <Award className="h-4 w-4 mr-2" />
+              Our Credentials
+            </div>
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
               Why Fortune 500 Companies Choose Us
             </h2>
@@ -314,7 +426,7 @@ Please follow up within 24 hours.
                 description: "Round-the-clock monitoring and support to keep your network running."
               }
             ].map((feature, index) => (
-              <div key={index} className="text-center bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+              <div key={index} className="text-center bg-white rounded-2xl p-8 shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2">
                 <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
                   <feature.icon className="h-8 w-8 text-white" />
                 </div>
@@ -325,7 +437,7 @@ Please follow up within 24 hours.
           </div>
 
           {/* Testimonial */}
-          <div className="bg-white rounded-2xl p-8 lg:p-12 shadow-2xl text-center max-w-4xl mx-auto">
+          <div className="bg-white rounded-2xl p-8 lg:p-12 shadow-xl text-center max-w-4xl mx-auto border border-gray-200">
             <div className="flex justify-center mb-6">
               {[...Array(5)].map((_, i) => (
                 <Star key={i} className="h-6 w-6 text-yellow-400 fill-current" />
@@ -341,6 +453,150 @@ Please follow up within 24 hours.
           </div>
         </div>
       </section>
+
+      {/* Our Approach Section */}
+      <section id="approach" className="py-24 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-20">
+            <div className="inline-flex items-center px-4 py-2 bg-blue-50 border border-blue-200 rounded-full text-blue-700 text-sm font-semibold mb-8">
+              <Building className="h-4 w-4 mr-2" />
+              Our Methodology
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              Our Three-Pillar Approach
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              BitSynapse's commitment to innovation through cutting-edge technology, 
+              industry expertise, and collaborative development.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            <div className="text-center group">
+              <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 h-full">
+                <div className="w-20 h-20 bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Zap className="h-10 w-10 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-6">Exploring Cutting-Edge Technologies</h3>
+                <p className="text-gray-600 leading-relaxed text-lg">
+                  Actively explore cutting-edge technologies and set up laboratories for full validation, 
+                  so as to make technological reserves to meet the innovative technology requirements 
+                  for customers' business.
+                </p>
+              </div>
+            </div>
+
+            <div className="text-center group">
+              <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 h-full">
+                <div className="w-20 h-20 bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Building className="h-10 w-10 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-6">Deeply Cultivating Industry Requirements</h3>
+                <p className="text-gray-600 leading-relaxed text-lg">
+                  Classify industries based on BitSynapse's huge high-quality customer group, 
+                  refine the generality of industry requirements and create industry solutions.
+                </p>
+              </div>
+            </div>
+
+            <div className="text-center group">
+              <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 h-full">
+                <div className="w-20 h-20 bg-gradient-to-r from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Users className="h-10 w-10 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-6">Joint Development of Innovative Applications</h3>
+                <p className="text-gray-600 leading-relaxed text-lg">
+                  Meet customers' digital transformation requirements, jointly develop innovative 
+                  applications for digital intelligence, tap data values, and realize customers' 
+                  own business development and decision optimization.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Connectivity and Innovation Section */}
+      <section id="innovation" className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-20">
+            <div className="inline-flex items-center px-4 py-2 bg-blue-50 border border-blue-200 rounded-full text-blue-700 text-sm font-semibold mb-8">
+              <Zap className="h-4 w-4 mr-2" />
+              Our Philosophy
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8">
+              Connectivity and Innovation
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div className="space-y-8">
+              <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200">
+                <div className="flex items-start space-x-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <Network className="h-6 w-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-3">Innovation-Driven Culture</h3>
+                    <p className="text-gray-600 leading-relaxed">
+                      Innovation is a core concept and value of BitSynapse's culture. Today, advanced technologies 
+                      such as cloud computing, big data, Internet of Things, artificial intelligence and machine learning, 
+                      etc, make our world constantly change at an unprecedented speed.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200">
+                <div className="flex items-start space-x-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <Users className="h-6 w-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-3">Digital Transformation Partnership</h3>
+                    <p className="text-gray-600 leading-relaxed">
+                      BitSynapse takes customer requirements as its foundation, deeply cultivates industry characteristics, 
+                      and actively make innovations in solutions, applications and services, and now is striding forward 
+                      from a system integrator and service provider to a digital transformation partner of customers.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="relative">
+              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-3xl p-12 border border-blue-100 shadow-xl">
+                <div className="text-center mb-8">
+                  <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl mb-6">
+                    <Zap className="h-10 w-10 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">Technology Excellence</h3>
+                </div>
+                
+                <div className="grid grid-cols-2 gap-6">
+                  <div className="text-center p-4 bg-white rounded-xl shadow-md border border-gray-100">
+                    <Server className="h-8 w-8 text-blue-600 mx-auto mb-2" />
+                    <div className="text-sm font-semibold text-gray-900">Cloud Computing</div>
+                  </div>
+                  <div className="text-center p-4 bg-white rounded-xl shadow-md border border-gray-100">
+                    <Shield className="h-8 w-8 text-blue-600 mx-auto mb-2" />
+                    <div className="text-sm font-semibold text-gray-900">AI & ML</div>
+                  </div>
+                  <div className="text-center p-4 bg-white rounded-xl shadow-md border border-gray-100">
+                    <Network className="h-8 w-8 text-blue-600 mx-auto mb-2" />
+                    <div className="text-sm font-semibold text-gray-900">IoT Solutions</div>
+                  </div>
+                  <div className="text-center p-4 bg-white rounded-xl shadow-md border border-gray-100">
+                    <Award className="h-8 w-8 text-blue-600 mx-auto mb-2" />
+                    <div className="text-sm font-semibold text-gray-900">Big Data</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
 
       {/* Contact Section */}
       <section id="contact" className="py-24 bg-white">
@@ -381,7 +637,7 @@ Please follow up within 24 hours.
                 </div>
               </div>
               
-              <div className="bg-gray-50 rounded-2xl p-8">
+              <div className="bg-gray-50 rounded-2xl p-8 border border-gray-200 shadow-lg">
                 <h4 className="text-xl font-bold text-gray-900 mb-4">What to Expect</h4>
                 <div className="space-y-4">
                   <div className="flex items-start">
@@ -415,7 +671,7 @@ Please follow up within 24 hours.
               </div>
             </div>
 
-            <div className="bg-gray-50 rounded-2xl p-8">
+            <div className="bg-white rounded-2xl p-8 shadow-xl border border-gray-200">
               <h3 className="text-2xl font-bold text-gray-900 mb-6">Request Consultation</h3>
               <form className="space-y-6" onSubmit={handleFormSubmit}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -560,6 +816,17 @@ Please follow up within 24 hours.
           </div>
         </div>
       </footer>
+
+      {/* Scroll to Top Button */}
+      {showScrollTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-8 right-8 bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-3 rounded-full shadow-2xl hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 transform hover:scale-110 z-50"
+          aria-label="Scroll to top"
+        >
+          <ChevronDown className="h-5 w-5 rotate-180" />
+        </button>
+      )}
     </div>
   );
 }
