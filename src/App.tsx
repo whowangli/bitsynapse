@@ -392,7 +392,7 @@ Please follow up within 24 hours.
       </section>
 
       {/* Why Choose Us Section */}
-      <section id="about" className="py-24 bg-white">
+      <section id="about" className="py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
             <div className="inline-flex items-center px-4 py-2 bg-blue-50 border border-blue-200 rounded-full text-blue-700 text-sm font-semibold mb-8">
@@ -455,7 +455,7 @@ Please follow up within 24 hours.
       </section>
 
       {/* Our Approach Section */}
-      <section id="approach" className="py-24 bg-gray-50">
+      <section id="approach" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
             <div className="inline-flex items-center px-4 py-2 bg-blue-50 border border-blue-200 rounded-full text-blue-700 text-sm font-semibold mb-8">
@@ -517,7 +517,7 @@ Please follow up within 24 hours.
       </section>
 
       {/* Connectivity and Innovation Section */}
-      <section id="innovation" className="py-24 bg-white">
+      <section id="innovation" className="py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
             <div className="inline-flex items-center px-4 py-2 bg-blue-50 border border-blue-200 rounded-full text-blue-700 text-sm font-semibold mb-8">
