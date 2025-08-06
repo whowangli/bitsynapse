@@ -111,7 +111,7 @@ Please follow up within 24 hours.
 
           {/* Mobile Navigation */}
           {isMenuOpen && (
-            <div className="lg:hidden bg-white/95 backdrop-blur-lg border-t border-gray-100 py-4">
+            <div className="lg:hidden bg-white border-t border-gray-100 py-4 shadow-lg">
               <div className="flex flex-col space-y-4">
                 <button onClick={() => scrollToSection('home')} className="text-gray-700 hover:text-blue-600 transition-colors text-left font-medium">
                   Home
