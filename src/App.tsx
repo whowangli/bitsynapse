@@ -195,7 +195,7 @@ Please follow up within 24 hours.
             </h1>
             
             <p className="text-xl md:text-2xl text-gray-600 mb-12 leading-relaxed max-w-3xl mx-auto">
-              Intelligent Network Infrastructure. Solutions Experience Without Borders.
+              Intelligent Network Infrastructure. Experienced Solutions Without Borders.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
@@ -479,9 +479,9 @@ Please follow up within 24 hours.
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-6">Exploring Cutting-Edge Technologies</h3>
                 <p className="text-gray-600 leading-relaxed text-lg">
-                  Actively explore cutting-edge technologies and set up laboratories for full validation, 
-                  so as to make technological reserves to meet the innovative technology requirements 
-                  for customers' business.
+                  Actively explore cutting-edge technologies and set up laboratories for full validation 
+                  to build technological reserves that meet innovative technology requirements 
+                  for customers' businesses.
                 </p>
               </div>
             </div>
@@ -491,10 +491,10 @@ Please follow up within 24 hours.
                 <div className="w-20 h-20 bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                   <Building className="h-10 w-10 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">Deeply Cultivating Industry Requirements</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-6">Deep Industry Requirements Analysis</h3>
                 <p className="text-gray-600 leading-relaxed text-lg">
-                  Classify industries based on BitSynapse's huge high-quality customer group, 
-                  refine the generality of industry requirements and create industry solutions.
+                  We classify industries based on BitSynapse's extensive high-quality customer base, 
+                  analyze common industry requirements, and create tailored industry solutions.
                 </p>
               </div>
             </div>
@@ -541,7 +541,7 @@ Please follow up within 24 hours.
                     <p className="text-gray-600 leading-relaxed">
                       Innovation is a core concept and value of BitSynapse's culture. Today, advanced technologies 
                       such as cloud computing, big data, Internet of Things, artificial intelligence and machine learning, 
-                      etc, make our world constantly change at an unprecedented speed.
+                      etc., constantly change our world at an unprecedented speed.
                     </p>
                   </div>
                 </div>
@@ -556,7 +556,7 @@ Please follow up within 24 hours.
                     <h3 className="text-xl font-bold text-gray-900 mb-3">Digital Transformation Partnership</h3>
                     <p className="text-gray-600 leading-relaxed">
                       BitSynapse takes customer requirements as its foundation, deeply cultivates industry characteristics, 
-                      and actively make innovations in solutions, applications and services, and now is striding forward 
+                      and actively makes innovations in solutions, applications and services, and is now striding forward 
                       from a system integrator and service provider to a digital transformation partner of customers.
                     </p>
                   </div>
@@ -767,7 +767,7 @@ Please follow up within 24 hours.
               </div>
               <p className="text-gray-400 mb-6 leading-relaxed">
                 Enterprise-grade network solutions for homes and businesses. 
-                15 years of Fortune 500 experience, now serving clients across the Maritimes and Canada.
+                15 years of Fortune 500 experience, now serving clients across Canada and the Maritimes.
               </p>
               <div className="flex items-center space-x-4">
                 <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
