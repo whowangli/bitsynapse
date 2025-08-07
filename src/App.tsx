@@ -226,8 +226,8 @@ Please follow up within 24 hours.
                 <div className="text-gray-600 font-medium">Networks Deployed</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-gray-900">24/7</div>
-                <div className="text-gray-600 font-medium">Support Available</div>
+              <div className="text-xl font-bold text-gray-900">Business Hours: 08:30–16:30</div>
+              <div className="text-xl font-medium text-gray-600">Technical Support: 24/7</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold text-gray-900">100%</div>
