@@ -250,21 +250,21 @@ Please follow up within 24 hours.
               <div className="space-y-6">
                 <div className="flex items-start">
                   <div className="w-2 h-2 bg-blue-600 rounded-full mt-3 mr-4 flex-shrink-0"></div>
-                  <div className="text-lg text-gray-700">Wi-Fi dead zones in your house?</div>
+                  <div className="text-lg text-gray-700">Wi-Fi Dead Zones</div>
                 </div>
                 <div className="flex items-start">
                   <div className="w-2 h-2 bg-blue-600 rounded-full mt-3 mr-4 flex-shrink-0"></div>
-                  <div className="text-lg text-gray-700">Smart devices always offline?</div>
+                  <div className="text-lg text-gray-700">Unreliable Smart Device Connectivity</div>
                 </div>
               </div>
               <div className="space-y-6">
                 <div className="flex items-start">
                   <div className="w-2 h-2 bg-blue-600 rounded-full mt-3 mr-4 flex-shrink-0"></div>
-                  <div className="text-lg text-gray-700">Issues with your computer or phone?</div>
+                  <div className="text-lg text-gray-700">Persistent Computer & Mobile Issues</div>
                 </div>
                 <div className="flex items-start">
                   <div className="w-2 h-2 bg-blue-600 rounded-full mt-3 mr-4 flex-shrink-0"></div>
-                  <div className="text-lg text-gray-700">Worried about your family's online security?</div>
+                  <div className="text-lg text-gray-700">Family Online Security Concerns</div>
                 </div>
               </div>
             </div>
@@ -282,11 +282,11 @@ Please follow up within 24 hours.
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
                 <div className="bg-white rounded-lg p-6 text-center shadow-lg border border-gray-200">
                   <Wifi className="h-12 w-12 text-blue-600 mx-auto mb-4" />
-                  <div className="font-semibold text-gray-900">Home Wi-Fi Upgrades</div>
+                  <div className="font-semibold text-gray-900">Whole-Home Wi-Fi Performance Upgrades</div>
                 </div>
                 <div className="bg-white rounded-lg p-6 text-center shadow-lg border border-gray-200">
                   <Home className="h-12 w-12 text-blue-600 mx-auto mb-4" />
-                  <div className="font-semibold text-gray-900">Smart Home Installation</div>
+                  <div className="font-semibold text-gray-900">Professional Smart Home Setup & Integration</div>
                 </div>
                 <div className="bg-white rounded-lg p-6 text-center shadow-lg border border-gray-200">
                   <Network className="h-12 w-12 text-blue-600 mx-auto mb-4" />
@@ -340,42 +340,42 @@ Please follow up within 24 hours.
             {[
               {
                 icon: Users,
-                title: "Consulting",
+                title: "IT Strategy Consulting",
                 description: "Expert IT consulting to assess your needs and design optimal network solutions."
               },
               {
                 icon: Network,
-                title: "Integration Implementation",
+                title: "System Integration & Deployment",
                 description: "Seamless integration and implementation of network infrastructure and systems."
               },
               {
                 icon: Zap,
-                title: "Support Maintenance",
+                title: "Proactive Support & Maintenance",
                 description: "Ongoing support and maintenance to keep your network running at peak performance."
               },
               {
                 icon: Wifi,
-                title: "Remote",
+                title: "Remote Monitoring & Management",
                 description: "Remote monitoring and management services for continuous network oversight."
               },
               {
                 icon: Building,
-                title: "Operation Management",
+                title: "Managed IT Services",
                 description: "Comprehensive operation management for enterprise network environments."
               },
               {
                 icon: Award,
-                title: "Optimization",
+                title: "Performance Optimization",
                 description: "Performance optimization services to maximize your network efficiency and speed."
               },
               {
                 icon: Server,
-                title: "Cloud",
+                title: "Cloud Migration & Strategy",
                 description: "Cloud solutions including private cloud setup and hybrid cloud integration."
               },
               {
                 icon: Shield,
-                title: "Security Implementation",
+                title: "Cybersecurity Solutions",
                 description: "Comprehensive security implementation and cybersecurity consulting services."
               }
             ].map((service, index) => (
